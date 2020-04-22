@@ -1,6 +1,8 @@
-package ch.nyp.xinnyi.update;
+package ch.nyp.xinnyi.dto.update;
 
-public class Message {
+import ch.nyp.xinnyi.Dto;
+
+public class Message  {
     private long message_id;
     private User from;
     private Chat chat;

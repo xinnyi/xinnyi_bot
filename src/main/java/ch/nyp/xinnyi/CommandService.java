@@ -1,7 +1,7 @@
 package ch.nyp.xinnyi;
 
 import ch.nyp.xinnyi.command.Command;
-import ch.nyp.xinnyi.update.NewMessageUpdate;
+import ch.nyp.xinnyi.dto.update.NewMessageUpdate;
 
 public interface CommandService {
 

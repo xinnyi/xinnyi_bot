@@ -1,4 +1,6 @@
-package ch.nyp.xinnyi.update;
+package ch.nyp.xinnyi.dto.update;
+
+import ch.nyp.xinnyi.Dto;
 
 public class Update {
 

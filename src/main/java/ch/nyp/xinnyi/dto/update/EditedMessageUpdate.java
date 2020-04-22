@@ -1,6 +1,8 @@
-package ch.nyp.xinnyi.update;
+package ch.nyp.xinnyi.dto.update;
 
-public class EditedMessageUpdate extends Update{
+import ch.nyp.xinnyi.Dto;
+
+public class EditedMessageUpdate extends Update {
 
     private Message edited_message;
 

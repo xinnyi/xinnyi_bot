@@ -1,7 +1,7 @@
 package ch.nyp.xinnyi.command;
 
-public class SayHelloCommand implements Command{
+public class SayHello implements Command{
     @Override public String getResponseText() {
-        return "Hello";
+        return "Hello there";
     }
 }
