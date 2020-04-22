@@ -3,7 +3,11 @@ package ch.nyp.xinnyi.bot.api;
 import ch.nyp.xinnyi.bot.api.dtos.Credentials;
 import ch.nyp.xinnyi.core.HttpConnector;
 import ch.nyp.xinnyi.error.BadRequestException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import java.net.http.HttpResponse;
@@ -12,34 +16,30 @@ import java.util.HashMap;
 @Service
 public class APIServiceImpl implements APIService {
 
-    @Value("${xinnyi.API_URL}")
-    private String API_URL;
-
-    @Value("${xinnyi.API_USERNAME}")
-    private String API_USERNAME;
-
-    @Value("${xinnyi.API_PASSWORD}")
-    private String API_PASSWORD;
-
     private HashMap<String, String> headers = new HashMap<>();
 
-    public APIServiceImpl() {
+    private Logger logger = LoggerFactory.getLogger(APIServiceImpl.class);
+    private Environment environment;
+
+    @Autowired
+    public APIServiceImpl(Environment environment) {
+        this.environment = environment;
         login();
     }
 
     private void login() {
-        HttpResponse response = HttpConnector.post(API_URL + "/login", new Credentials(API_USERNAME, API_PASSWORD));
+        HttpResponse response = HttpConnector.post(environment.getProperty("xinnyi.API_URL")+ "/login", new Credentials(environment.getProperty("xinnyi.API_USERNAME"), environment.getProperty("xinnyi.API_PASSWORD")));
         if (response.statusCode() == 200) {
-            System.out.println("login body: " + response.body());
-            System.out.println("login headers: " + response.headers());
+            logger.info("Connected to api");
             headers.put("Authorization", response.headers().firstValue("authorization").get());
         } else {
+            logger.error("Could not connect to api");
             throw new BadRequestException("login error");
         }
     }
 
     public String getUsers() {
-        HttpResponse response = HttpConnector.get(API_URL + "/users", null, headers);
+        HttpResponse response = HttpConnector.get(environment.getProperty("xinnyi.API_USERNAME") + "/users", null, headers);
         if (response.statusCode() == 200) {
             return (String) response.body();
         } else {
