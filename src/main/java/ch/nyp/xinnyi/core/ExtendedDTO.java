@@ -1,8 +1,8 @@
-package ch.nyp.xinnyi;
+package ch.nyp.xinnyi.core;
 
 import com.google.gson.Gson;
 
-public interface Dto {
+public interface ExtendedDTO {
 
     default public String toJson() {
         Gson gson = new Gson();

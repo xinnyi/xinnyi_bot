@@ -1,8 +1,8 @@
-package ch.nyp.xinnyi.dto;
+package ch.nyp.xinnyi.bot.api.dtos;
 
-import ch.nyp.xinnyi.Dto;
+import ch.nyp.xinnyi.core.ExtendedDTO;
 
-public class Credentials implements Dto {
+public class Credentials implements ExtendedDTO {
 
     private String email;
     private String password;

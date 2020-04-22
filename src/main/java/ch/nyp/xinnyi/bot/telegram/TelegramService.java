@@ -1,4 +1,4 @@
-package ch.nyp.xinnyi;
+package ch.nyp.xinnyi.bot.telegram;
 
 public interface TelegramService {
 

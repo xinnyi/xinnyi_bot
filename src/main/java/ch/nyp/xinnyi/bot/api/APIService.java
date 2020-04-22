@@ -1,4 +1,4 @@
-package ch.nyp.xinnyi;
+package ch.nyp.xinnyi.bot.api;
 
 public interface APIService {
 

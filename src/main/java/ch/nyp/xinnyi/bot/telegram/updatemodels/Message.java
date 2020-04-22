@@ -1,6 +1,4 @@
-package ch.nyp.xinnyi.dto.update;
-
-import ch.nyp.xinnyi.Dto;
+package ch.nyp.xinnyi.bot.telegram.updatemodels;
 
 public class Message  {
     private long message_id;

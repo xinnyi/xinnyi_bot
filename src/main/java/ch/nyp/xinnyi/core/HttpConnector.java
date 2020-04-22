@@ -1,4 +1,4 @@
-package ch.nyp.xinnyi;
+package ch.nyp.xinnyi.core;
 
 import ch.nyp.xinnyi.error.BadRequestException;
 
@@ -12,7 +12,7 @@ public class HttpConnector {
 
     private static HttpClient httpClient = HttpClient.newBuilder().build();
 
-    private static HttpResponse send(String httpMethod, String urlAsString, Dto payload, Map<String, String> headers) {
+    private static HttpResponse send(String httpMethod, String urlAsString, ExtendedDTO payload, Map<String, String> headers) {
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder().uri(URI.create(urlAsString));
 
         if (payload == null) {
@@ -42,11 +42,11 @@ public class HttpConnector {
         return send("GET", url, null, null);
     }
 
-    public static HttpResponse get(String url, Dto payload) {
+    public static HttpResponse get(String url, ExtendedDTO payload) {
         return send("GET", url, payload, null);
     }
 
-    public static HttpResponse get(String url, Dto payload, Map<String, String> headers) {
+    public static HttpResponse get(String url, ExtendedDTO payload, Map<String, String> headers) {
         return send("GET", url, payload, headers);
     }
 
@@ -55,11 +55,11 @@ public class HttpConnector {
         return send("POST", url, null, null);
     }
 
-    public static HttpResponse post(String url, Dto payload) {
+    public static HttpResponse post(String url, ExtendedDTO payload) {
         return send("POST", url, payload, null);
     }
 
-    public static HttpResponse post(String url, Dto payload, Map<String, String> headers) {
+    public static HttpResponse post(String url, ExtendedDTO payload, Map<String, String> headers) {
         return send("POST", url, payload, headers);
     }
 
@@ -68,11 +68,11 @@ public class HttpConnector {
         return send("PUT", url, null, null);
     }
 
-    public static HttpResponse put(String url, Dto payload) {
+    public static HttpResponse put(String url, ExtendedDTO payload) {
         return send("PUT", url, payload, null);
     }
 
-    public static HttpResponse put(String url, Dto payload, Map<String, String> headers) {
+    public static HttpResponse put(String url, ExtendedDTO payload, Map<String, String> headers) {
         return send("PUT", url, payload, headers);
     }
 
@@ -81,11 +81,11 @@ public class HttpConnector {
         return send("DELETE", url, null, null);
     }
 
-    public static HttpResponse delete(String url, Dto payload) {
+    public static HttpResponse delete(String url, ExtendedDTO payload) {
         return send("DELETE", url, payload, null);
     }
 
-    public static HttpResponse delete(String url, Dto payload, Map<String, String> headers) {
+    public static HttpResponse delete(String url, ExtendedDTO payload, Map<String, String> headers) {
         return send("DELETE", url, payload, headers);
     }
 
