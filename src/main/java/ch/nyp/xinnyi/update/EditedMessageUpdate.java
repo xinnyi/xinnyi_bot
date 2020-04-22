@@ -1,6 +1,6 @@
 package ch.nyp.xinnyi.update;
 
-public class EditedMessageUpdate {
+public class EditedMessageUpdate extends Update{
 
     private Message edited_message;
 

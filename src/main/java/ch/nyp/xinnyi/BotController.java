@@ -16,24 +16,26 @@ import java.io.IOException;
 public class BotController {
 
     private CommandService commandService;
-    private ResponseService responseService;
+    private TelegramService telegramService;
+    private APIService apiService;
 
     @Autowired
-    public BotController(CommandService commandService, ResponseService responseService){
+    public BotController(CommandService commandService, TelegramService telegramService, APIService apiService){
+        this.telegramService = telegramService;
         this.commandService = commandService;
-        this.responseService = responseService;
+        this.apiService = apiService;
     }
 
     @PostMapping
-    public ResponseEntity<Void> newMessage( @RequestBody NewMessageUpdate update) {
-
-        // parse update type
-
+    public ResponseEntity<Void> newMessage(@RequestBody NewMessageUpdate update) throws IOException {
         Command command = commandService.parseCommand(update);
-        if(command != null){
-            responseService.sendTextResponse(command.getResponseText(), update.getMessage().getChat().getId());
+        if (command !=  null) {
+            telegramService.sendText(command.getResponseText(), update.getMessage().getChat().getId());
+        }else{
+            telegramService.sendText(update.getMessage().getText(),update.getMessage().getChat().getId());
         }
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
+
 
 }
