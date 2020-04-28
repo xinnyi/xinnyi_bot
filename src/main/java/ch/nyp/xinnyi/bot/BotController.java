@@ -1,7 +1,7 @@
 package ch.nyp.xinnyi.bot;
 
 import ch.nyp.xinnyi.bot.telegram.TelegramService;
-import ch.nyp.xinnyi.bot.telegram.updatemodels.NewMessageUpdate;
+import ch.nyp.xinnyi.bot.telegram.updatemodels.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class BotController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> newMessage(@RequestBody NewMessageUpdate update) {
+    public ResponseEntity<Void> newMessage(@RequestBody Update update) {
         botService.handleNewMessageUpdate(update);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }

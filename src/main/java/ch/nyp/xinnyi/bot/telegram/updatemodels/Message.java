@@ -3,9 +3,17 @@ package ch.nyp.xinnyi.bot.telegram.updatemodels;
 public class Message  {
     private long message_id;
     private User from;
+    private User forward_from;
     private Chat chat;
     private long date;
+    private long forward_date;
     private String text;
+    private Entity[] entities;
+    private Photo[] photo;
+    private Voice voice;
+    private Document document;
+    private Message reply_to_message;
+
 
     public long getMessage_id() {
         return message_id;
@@ -49,6 +57,69 @@ public class Message  {
 
     public Message setText(String text) {
         this.text = text;
+        return this;
+    }
+
+    public User getForward_from() {
+        return forward_from;
+    }
+
+    public Message setForward_from(User forward_from) {
+        this.forward_from = forward_from;
+        return this;
+    }
+
+    public long getForward_date() {
+        return forward_date;
+    }
+
+    public Message setForward_date(long forward_date) {
+        this.forward_date = forward_date;
+        return this;
+    }
+
+    public Entity[] getEntities() {
+        return entities;
+    }
+
+    public Message setEntities(Entity[] entities) {
+        this.entities = entities;
+        return this;
+    }
+
+    public Photo[] getPhoto() {
+        return photo;
+    }
+
+    public Message setPhoto(Photo[] photo) {
+        this.photo = photo;
+        return this;
+    }
+
+    public Voice getVoice() {
+        return voice;
+    }
+
+    public Message setVoice(Voice voice) {
+        this.voice = voice;
+        return this;
+    }
+
+    public Document getDocument() {
+        return document;
+    }
+
+    public Message setDocument(Document document) {
+        this.document = document;
+        return this;
+    }
+
+    public Message getReply_to_message() {
+        return reply_to_message;
+    }
+
+    public Message setReply_to_message(Message reply_to_message) {
+        this.reply_to_message = reply_to_message;
         return this;
     }
 }
