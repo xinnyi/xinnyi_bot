@@ -4,6 +4,7 @@ package ch.nyp.xinnyi.bot.telegram;
 import ch.nyp.xinnyi.core.HttpConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class TelegramServiceImpl implements TelegramService {
     private Logger logger = LoggerFactory.getLogger(TelegramServiceImpl.class);
     private Environment environment;
 
+    @Autowired
     public TelegramServiceImpl(Environment environment) {
         this.environment = environment;
 

@@ -1,6 +1,5 @@
 package ch.nyp.xinnyi.bot;
 
-import ch.nyp.xinnyi.core.ExtendedCommand;
 import ch.nyp.xinnyi.bot.telegram.TelegramService;
 import ch.nyp.xinnyi.bot.telegram.updatemodels.NewMessageUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +24,7 @@ public class BotController {
 
     @PostMapping
     public ResponseEntity<Void> newMessage(@RequestBody NewMessageUpdate update) {
-        try {
-            ExtendedCommand extendedCommand = botService.parseCommand(update);
-            if (extendedCommand != null) {
-                extendedCommand.execute();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        botService.handleNewMessageUpdate(update);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 

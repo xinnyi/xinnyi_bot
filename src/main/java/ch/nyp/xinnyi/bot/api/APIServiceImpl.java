@@ -6,7 +6,6 @@ import ch.nyp.xinnyi.error.BadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
@@ -28,18 +27,18 @@ public class APIServiceImpl implements APIService {
     }
 
     private void login() {
-        HttpResponse response = HttpConnector.post(environment.getProperty("xinnyi.API_URL")+ "/login", new Credentials(environment.getProperty("xinnyi.API_USERNAME"), environment.getProperty("xinnyi.API_PASSWORD")));
+        HttpResponse response = HttpConnector.post(environment.getProperty("xinnyi.API_URL") + "/login", new Credentials(environment.getProperty("xinnyi.API_USERNAME"), environment.getProperty("xinnyi.API_PASSWORD")));
         if (response.statusCode() == 200) {
-            logger.info("Connected to api");
             headers.put("Authorization", response.headers().firstValue("authorization").get());
+            logger.info("Connected to api");
         } else {
-            logger.error("Could not connect to api");
-            throw new BadRequestException("login error");
+            throw new BadRequestException("api login error");
         }
     }
 
-    public String getUsers() {
-        HttpResponse response = HttpConnector.get(environment.getProperty("xinnyi.API_USERNAME") + "/users", null, headers);
+    public String getUsers(long userId) {
+        headers.put("userid", String.valueOf(userId));
+        HttpResponse response = HttpConnector.get(environment.getProperty("xinnyi.API_URL") + "/users", null, headers);
         if (response.statusCode() == 200) {
             return (String) response.body();
         } else {
