@@ -39,4 +39,14 @@ public class TelegramServiceImpl implements TelegramService {
         HttpResponse response = HttpConnector.post("https://api.telegram.org/bot" + environment.getProperty("xinnyi.TOKEN")  + "/sendMessage?chat_id=" + chatId + "&text=" + text);
         return response.statusCode() == 200;
     }
+
+    public boolean sendHtml(String htmlText, long chatId) {
+        HttpResponse response = HttpConnector.post("https://api.telegram.org/bot" + environment.getProperty("xinnyi.TOKEN")  + "/sendMessage?chat_id=" + chatId + "&text=" + htmlText +"&parse_mode=html");
+        return response.statusCode() == 200;
+    }
+
+
+    // download file
+    // https://api.telegram.org/bot<token>/getFile?file_id=<file_id>
+    // https://api.telegram.org/file/bot<token>/<file_path>
 }

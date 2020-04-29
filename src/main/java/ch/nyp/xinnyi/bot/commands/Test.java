@@ -20,7 +20,7 @@ public class Test extends ExtendedCommand {
     @Override
     public void execute() {
         try {
-            telegramService.sendText(URLEncoder.encode("https://noatest.noseryoung.ch", "UTF-8"), chatId);
+            telegramService.sendHtml(URLEncoder.encode("<p>https://noatest.noseryoung.ch</p>", "UTF-8"), chatId);
         } catch (UnsupportedEncodingException e) {
             telegramService.sendText("command error", chatId);
         }

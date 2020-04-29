@@ -15,7 +15,7 @@ public class SayHello extends ExtendedCommand {
 
     @Override
     public void execute() {
-        telegramService.sendText("Hello there", chatId);
+        telegramService.sendText("Hello", chatId);
     }
 
 }
