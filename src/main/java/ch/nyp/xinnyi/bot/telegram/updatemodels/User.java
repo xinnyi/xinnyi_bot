@@ -2,7 +2,7 @@ package ch.nyp.xinnyi.bot.telegram.updatemodels;
 
 public class User {
 
-    private long id;
+    private String id;
     private boolean is_bot;
     private String first_name;
     private String last_name;
@@ -13,11 +13,11 @@ public class User {
     private boolean supports_inline_queries;
 
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public User setId(long id) {
+    public User setId(String id) {
         this.id = id;
         return this;
     }

@@ -1,6 +1,8 @@
 package ch.nyp.xinnyi.bot.telegram;
 
 
+import ch.nyp.xinnyi.bot.telegram.dtos.ReplayMarkup;
+import ch.nyp.xinnyi.bot.telegram.dtos.Reply;
 import ch.nyp.xinnyi.core.HttpConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,29 +22,63 @@ public class TelegramServiceImpl implements TelegramService {
     @Autowired
     public TelegramServiceImpl(Environment environment) {
         this.environment = environment;
-
         setWebHook();
     }
 
-    private boolean setWebHook() {
+    private void setWebHook() {
         HttpResponse response = HttpConnector.post("https://api.telegram.org/bot" + environment.getProperty("xinnyi.TOKEN") + "/setWebhook?url=" + environment.getProperty("xinnyi.BOT_URL"));
         if (response.statusCode() == 200) {
             logger.info("Webhook set");
-            return true;
         } else {
             logger.error("Could not setup webhook");
-            return false;
         }
     }
 
-    public boolean sendText(String text, long chatId) {
-        HttpResponse response = HttpConnector.post("https://api.telegram.org/bot" + environment.getProperty("xinnyi.TOKEN")  + "/sendMessage?chat_id=" + chatId + "&text=" + text);
-        return response.statusCode() == 200;
+
+    @Override
+    public void sendReply(String chatId, String text) {
+        sendReply(chatId, text, null);
     }
 
-    public boolean sendHtml(String htmlText, long chatId) {
-        HttpResponse response = HttpConnector.post("https://api.telegram.org/bot" + environment.getProperty("xinnyi.TOKEN")  + "/sendMessage?chat_id=" + chatId + "&text=" + htmlText +"&parse_mode=html");
-        return response.statusCode() == 200;
+
+    @Override
+    public void sendReply(String chatId, String text, ReplayMarkup replayMarkup) {
+        int maxlength = Integer.parseInt(environment.getProperty("telegram.message.maxlength"));
+        int start = 0;
+        while (start < text.length()) {
+            int endMax = Math.min(start + maxlength, text.length());
+            int end = endMax;
+            if (end < text.length()) {
+                while (end > start) {
+                    if (text.charAt(end) == ' ' || text.startsWith("\r\n", end - 4)) { // space or line feed
+                        break;
+                    }
+                    end--;
+                }
+            }
+            // no space or line feed found
+            if (end <= start) {
+                end = endMax;
+            }
+
+            // send replayMarkups only once after text
+            if (end == text.length()) {
+                HttpConnector.post("https://api.telegram.org/bot" + environment.getProperty("xinnyi.TOKEN") + "/sendMessage",
+                        new Reply(chatId, text.substring(start, end), replayMarkup));
+            } else {
+                HttpConnector.post("https://api.telegram.org/bot" + environment.getProperty("xinnyi.TOKEN") + "/sendMessage",
+                        new Reply(chatId, text.substring(start, end)));
+            }
+            start = end + 1;
+        }
+    }
+
+    @Override public void updateReply(String chatId, String messageId, String text) {
+        updateReply(chatId, messageId, text, null);
+    }
+
+    @Override public void updateReply(String chatId, String messageId, String text, ReplayMarkup replayMarkup) {
+        HttpConnector.post("https://api.telegram.org/bot" + environment.getProperty("xinnyi.TOKEN") + "/editMessageText", new Reply(chatId, messageId, text, replayMarkup));
     }
 
 

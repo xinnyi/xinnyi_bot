@@ -13,7 +13,7 @@ public class ListUsers extends ExtendedCommand {
     private APIService apiService;
     private TelegramService telegramService;
 
-    public ListUsers(long chatId, long userId, TelegramService telegramService, APIService apiService) {
+    public ListUsers(String chatId, String userId, TelegramService telegramService, APIService apiService) {
         super(chatId,userId);
         this.apiService = apiService;
         this.telegramService = telegramService;
@@ -22,9 +22,9 @@ public class ListUsers extends ExtendedCommand {
     @Override
     public void execute() {
         try {
-            telegramService.sendText(URLEncoder.encode(apiService.getUsers(userId), "UTF-8"), chatId);
+            telegramService.sendReply(URLEncoder.encode(apiService.getUsers(userId), "UTF-8"), chatId);
         } catch (BadRequestException | UnsupportedEncodingException e) {
-            telegramService.sendText("command error", chatId);
+            telegramService.sendReply("command error", chatId);
         }
     }
 

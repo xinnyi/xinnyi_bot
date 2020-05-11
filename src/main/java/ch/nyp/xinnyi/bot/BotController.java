@@ -2,13 +2,13 @@ package ch.nyp.xinnyi.bot;
 
 import ch.nyp.xinnyi.bot.telegram.TelegramService;
 import ch.nyp.xinnyi.bot.telegram.updatemodels.Update;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
@@ -25,10 +25,10 @@ public class BotController {
 
     @PostMapping
     public ResponseEntity<Void> newMessage(@RequestBody Update update) {
-        System.out.println(new Gson().toJson(update));
         botService.handleNewMessageUpdate(update);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
+
 
 
 }

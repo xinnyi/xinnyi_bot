@@ -1,9 +1,15 @@
 package ch.nyp.xinnyi.bot.telegram;
 
+import ch.nyp.xinnyi.bot.telegram.dtos.ReplayMarkup;
+
+
 public interface TelegramService {
 
-    boolean sendText(String text, long chatId);
+    void sendReply(String chatId, String text);
 
+    void sendReply(String chatId, String text, ReplayMarkup replayMarkup);
 
-    boolean sendHtml(String htmlText, long chatId);
+    void updateReply(String chatId, String messageId, String text);
+
+    void updateReply(String chatId, String messageId, String text, ReplayMarkup replayMarkup);
 }

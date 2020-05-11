@@ -2,16 +2,17 @@ package ch.nyp.xinnyi.bot.telegram.updatemodels;
 
 public class Update {
 
-    private long update_id;
+    private String update_id;
     private Message edited_message;
     private Message message;
+    private CallbackQuery callback_query;
 
 
-    public long getUpdate_id() {
+    public String getUpdate_id() {
         return update_id;
     }
 
-    public Update setUpdate_id(long update_id) {
+    public Update setUpdate_id(String update_id) {
         this.update_id = update_id;
         return this;
     }
@@ -34,6 +35,12 @@ public class Update {
         return this;
     }
 
+    public CallbackQuery getCallback_query() {
+        return callback_query;
+    }
 
-
+    public Update setCallback_query(CallbackQuery callback_query) {
+        this.callback_query = callback_query;
+        return this;
+    }
 }

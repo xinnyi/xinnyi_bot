@@ -1,18 +1,18 @@
 package ch.nyp.xinnyi.bot.telegram.updatemodels;
 
 public class Chat {
-    private long id;
+    private String id;
     private String type;
     private String title;
     private String username;
     private String first_name;
     private String last_name;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public Chat setId(long id) {
+    public Chat setId(String id) {
         this.id = id;
         return this;
     }

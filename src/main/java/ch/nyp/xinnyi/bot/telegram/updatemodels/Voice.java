@@ -1,17 +1,17 @@
 package ch.nyp.xinnyi.bot.telegram.updatemodels;
 
 public class Voice {
-    private long duration;
+    private int duration;
     private String mime_type;
     private String file_id;
     private String file_unique_id;
-    private long file_size;
+    private int file_size;
 
-    public long getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public Voice setDuration(long duration) {
+    public Voice setDuration(int duration) {
         this.duration = duration;
         return this;
     }
@@ -43,11 +43,11 @@ public class Voice {
         return this;
     }
 
-    public long getFile_size() {
+    public int getFile_size() {
         return file_size;
     }
 
-    public Voice setFile_size(long file_size) {
+    public Voice setFile_size(int file_size) {
         this.file_size = file_size;
         return this;
     }

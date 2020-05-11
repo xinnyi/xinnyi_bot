@@ -1,12 +1,12 @@
 package ch.nyp.xinnyi.bot.telegram.updatemodels;
 
 public class Message  {
-    private long message_id;
+    private String message_id;
     private User from;
     private User forward_from;
     private Chat chat;
-    private long date;
-    private long forward_date;
+    private int date;
+    private int forward_date;
     private String text;
     private Entity[] entities;
     private Photo[] photo;
@@ -15,11 +15,11 @@ public class Message  {
     private Message reply_to_message;
 
 
-    public long getMessage_id() {
+    public String getMessage_id() {
         return message_id;
     }
 
-    public Message setMessage_id(long message_id) {
+    public Message setMessage_id(String message_id) {
         this.message_id = message_id;
         return this;
     }
@@ -42,11 +42,11 @@ public class Message  {
         return this;
     }
 
-    public long getDate() {
+    public int getDate() {
         return date;
     }
 
-    public Message setDate(long date) {
+    public Message setDate(int date) {
         this.date = date;
         return this;
     }
@@ -69,11 +69,11 @@ public class Message  {
         return this;
     }
 
-    public long getForward_date() {
+    public int getForward_date() {
         return forward_date;
     }
 
-    public Message setForward_date(long forward_date) {
+    public Message setForward_date(int forward_date) {
         this.forward_date = forward_date;
         return this;
     }

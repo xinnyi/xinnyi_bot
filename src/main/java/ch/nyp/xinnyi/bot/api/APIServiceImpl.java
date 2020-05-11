@@ -36,8 +36,8 @@ public class APIServiceImpl implements APIService {
         }
     }
 
-    public String getUsers(long userId) {
-        headers.put("userid", String.valueOf(userId));
+    public String getUsers(String userId) {
+        headers.put("userid", userId);
         HttpResponse response = HttpConnector.get(environment.getProperty("xinnyi.API_URL") + "/users", null, headers);
         if (response.statusCode() == 200) {
             return (String) response.body();

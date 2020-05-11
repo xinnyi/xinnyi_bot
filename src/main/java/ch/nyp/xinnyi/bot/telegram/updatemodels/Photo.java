@@ -3,9 +3,9 @@ package ch.nyp.xinnyi.bot.telegram.updatemodels;
 public class Photo {
     private String file_id;
     private String file_unique_id;
-    private long file_size;
-    private long width;
-    private long height;
+    private int file_size;
+    private int width;
+    private int height;
 
     public String getFile_id() {
         return file_id;
@@ -25,29 +25,29 @@ public class Photo {
         return this;
     }
 
-    public long getFile_size() {
+    public int getFile_size() {
         return file_size;
     }
 
-    public Photo setFile_size(long file_size) {
+    public Photo setFile_size(int file_size) {
         this.file_size = file_size;
         return this;
     }
 
-    public long getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public Photo setWidth(long width) {
+    public Photo setWidth(int width) {
         this.width = width;
         return this;
     }
 
-    public long getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public Photo setHeight(long height) {
+    public Photo setHeight(int height) {
         this.height = height;
         return this;
     }

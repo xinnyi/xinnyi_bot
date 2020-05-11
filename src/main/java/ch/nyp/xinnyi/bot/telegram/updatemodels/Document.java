@@ -5,7 +5,7 @@ public class Document {
     private String mime_type;
     private String file_id;
     private String file_unique_id;
-    private long file_size;
+    private int file_size;
 
     public String getFile_name() {
         return file_name;
@@ -43,11 +43,11 @@ public class Document {
         return this;
     }
 
-    public long getFile_size() {
+    public int getFile_size() {
         return file_size;
     }
 
-    public Document setFile_size(long file_size) {
+    public Document setFile_size(int file_size) {
         this.file_size = file_size;
         return this;
     }

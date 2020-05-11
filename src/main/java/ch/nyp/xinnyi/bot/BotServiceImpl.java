@@ -2,14 +2,12 @@ package ch.nyp.xinnyi.bot;
 
 import ch.nyp.xinnyi.bot.api.APIService;
 import ch.nyp.xinnyi.bot.commands.ListUsers;
-import ch.nyp.xinnyi.bot.commands.SayHello;
 import ch.nyp.xinnyi.bot.commands.Test;
 import ch.nyp.xinnyi.bot.telegram.TelegramService;
 import ch.nyp.xinnyi.bot.telegram.updatemodels.Update;
 import ch.nyp.xinnyi.core.ExtendedCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 
 @Service
@@ -33,22 +31,23 @@ public class BotServiceImpl implements BotService {
 
 
     public ExtendedCommand parseCommand(Update update) {
-        if(update.getMessage() != null){
-            if(update.getMessage().getText() != null){
+        if (update.getMessage() != null) {
+            if (update.getMessage().getText() != null) {
                 String text = update.getMessage().getText();
-                long chatId = update.getMessage().getChat().getId();
-                long userId = update.getMessage().getFrom().getId();
+                String chatId = update.getMessage().getChat().getId();
+                String userId = update.getMessage().getFrom().getId();
 
 
-                if (text.equalsIgnoreCase("/say hello")) {
-                    return new SayHello(chatId, userId, telegramService);
-                } else if (text.equalsIgnoreCase("/list users")) {
+                if (text.equalsIgnoreCase("/list users")) {
                     return new ListUsers(chatId, userId, telegramService, apiService);
                 } else if (text.equalsIgnoreCase("/test")) {
                     return new Test(chatId, userId, telegramService);
                 }
             }
-
+        } else if (update.getCallback_query() != null) {
+            String chatId = update.getCallback_query().getMessage().getChat().getId();
+            String messageId =update.getCallback_query().getMessage().getMessage_id();
+            telegramService.updateReply(chatId, messageId,update.getCallback_query().getData().equals("yes") ? "Nice" : "Ouf");
         }
         return null;
     }

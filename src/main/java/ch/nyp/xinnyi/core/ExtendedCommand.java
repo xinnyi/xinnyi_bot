@@ -3,9 +3,9 @@ package ch.nyp.xinnyi.core;
 
 public abstract class ExtendedCommand {
 
-    protected long chatId, userId;
+    protected String chatId, userId;
 
-    public ExtendedCommand(long chatId, long userId){
+    public ExtendedCommand(String chatId, String userId){
         this.chatId = chatId;
         this.userId = userId;
 }
